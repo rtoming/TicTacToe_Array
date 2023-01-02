@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 class Board {
     String[] board = {" "," "," "," "," "," "," "," "," "};
-    int position;
     int count;
 
     void printBoard() {
@@ -13,9 +12,9 @@ class Board {
         System.out.println(" " + board[6] + " | " + board[7] + " | " + board[8] + " ");
     }
 
-    boolean fillBoard() {
+    boolean fillBoard(int position, String markIt) {
         if (board[position - 1].equals(" ")) {
-            board[position - 1] = "markIt";
+            board[position - 1] = markIt;
             count++;
             return true;
         } else {
@@ -68,12 +67,38 @@ class Player {
 }
 
 class Game {
-    String message = "Enter Your position (1 - 9)";
+    Board board = new Board();
+    Player player1 = new Player("X");
+    Player player2 = new Player("O");
+    Player currentPlayer = player1;
 
     void play() {
+        while (true) {
+            String message = "Enter Your position (1 - 9)";
+            System.out.println();
+            System.out.println(currentPlayer.name + " " + message);
+            Scanner scanner = new Scanner(System.in);
+            int position = scanner.nextInt();
 
+            if (board.fillBoard(position, currentPlayer.mark)) {
+                board.printBoard();
+
+                if (board.checkWinner(currentPlayer.mark)) {
+                    System.out.println(currentPlayer.name + " is winner!");
+                    break;
+                } else if (board.checkDraw()) {
+                    System.out.println("Game is draw!");
+                    break;
+                } else {
+                    if (currentPlayer.equals(player1)) {
+                        currentPlayer = player2;
+                    } else {
+                        currentPlayer = player1;
+                    }
+                }
+            }
+        }
     }
-
 }
 
 public class Main {
@@ -81,8 +106,8 @@ public class Main {
     public static void main(String[] args) {
 
         new Board().printBoard();
-        Player player1 = new Player("X");
-        Player player2 = new Player("O");
+        Game game = new Game();
+        game.play();
 
     }
 }
