@@ -42,7 +42,11 @@ class Board {
     }
 
     boolean checkDraw() {
-
+        if (count == 9) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
