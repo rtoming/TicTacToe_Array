@@ -10,6 +10,7 @@
 * If a player decides to select  **X** , the other player will take  **O** . Players take turns putting their marks in empty squares.
 * The first player to get **3** of their marks in a straight row wins.
 * If all the **9** squares are full but none of the players can get **3** of their marks in a row, it's a draw.
+
 * Step 1: Creating the Board Class
 * Step 2: Creating the Player Class
 * Step 3: Creating the Game Class
